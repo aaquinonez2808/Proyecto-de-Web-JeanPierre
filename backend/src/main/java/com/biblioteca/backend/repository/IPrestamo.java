@@ -1,0 +1,8 @@
+package com.biblioteca.backend.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.biblioteca.backend.models.Prestamo;
+
+public interface IPrestamo  extends JpaRepository<Prestamo, Long>{
+    
+}

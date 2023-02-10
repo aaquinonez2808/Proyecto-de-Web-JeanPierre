@@ -1,0 +1,2 @@
+/*INSERTAR UN USUARIO */
+INSERT INTO usuario (email, nombre, password, user_name ) VALUES ('jpsalazar@espe.edu.ec','Jean Pierre Salazar', '$2a$10$roh9ewYIddI3CWTuv.kJ5O6dfaiSmkbJ1phm3SvPt5gaNU06skUZy', 'JeanPierre');
