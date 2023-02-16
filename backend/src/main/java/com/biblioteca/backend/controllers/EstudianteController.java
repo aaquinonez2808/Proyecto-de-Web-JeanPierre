@@ -63,6 +63,7 @@ public class EstudianteController {
     @DeleteMapping("/delete/{id}")
     private ResponseEntity<?> delete(@PathVariable Long id) {
         Estudiante estudiante = estudianteService.findById(id);
+        System.out.println(estudiante.getNombre());
         if (estudiante == null) {
             return ResponseEntity.notFound().build();
         }

@@ -55,6 +55,7 @@ public class GeneroController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody Genero genero, @PathVariable Long id) {
         Genero generoBuscado = generoService.findById(id);
+        System.out.println(generoBuscado.getNombre());
         if (generoBuscado == null) {
             return ResponseEntity.notFound().build();
         }

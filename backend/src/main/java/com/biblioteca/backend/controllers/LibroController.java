@@ -51,7 +51,7 @@ public class LibroController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody Libro libro, @PathVariable Long id) {
-        Libro libroBuscado = libroService.findById(id);
+        Libro libroBuscado = libroService.findById(id).get();
         if (libroBuscado == null) {
             return ResponseEntity.notFound().build();
         }
@@ -62,7 +62,7 @@ public class LibroController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Libro libroBuscado = libroService.findById(id);
+        Libro libroBuscado = libroService.findById(id).get();
         if (libroBuscado == null) {
             return ResponseEntity.notFound().build();
         }

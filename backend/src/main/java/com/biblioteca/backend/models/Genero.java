@@ -2,6 +2,8 @@ package com.biblioteca.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +27,8 @@ public class Genero {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(mappedBy = "genero", orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "genero", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Libro> libros;
 
     

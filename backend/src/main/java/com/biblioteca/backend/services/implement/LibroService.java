@@ -4,6 +4,8 @@ import com.biblioteca.backend.models.Libro;
 import com.biblioteca.backend.repository.ILibro;
 import com.biblioteca.backend.services.interfaces.ILibroService;
 import java.util.List;
+import java.util.Optional;
+
 import com.biblioteca.backend.dto.LibroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +33,8 @@ public class LibroService implements ILibroService{
     }
 
     @Override
-    public Libro findById(Long id) {
-        return libroRepository.findById(id).orElse(null);
+    public Optional<Libro> findById(Long id) {
+        return libroRepository.findById(id);
     }
 
     @Override

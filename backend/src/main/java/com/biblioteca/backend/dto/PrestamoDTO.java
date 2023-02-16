@@ -7,9 +7,11 @@ import com.biblioteca.backend.models.Prestamo;
 import com.biblioteca.backend.models.Estudiante;
 import com.biblioteca.backend.models.Libro;
 
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PrestamoDTO {
-    
+
     private Long id;
     private String fechaPrestamo;
     private String fechaDevolucion;
@@ -25,12 +27,22 @@ public class PrestamoDTO {
     }
 
     public Estudiante toEstudiante() {
-        return new Estudiante(this.estudiante.getId(), this.estudiante.getNombre(), this.estudiante.getApellido(), this.estudiante.getCedula(), this.estudiante.getTelefono(), this.estudiante.getEmail(),this.estudiante.getDireccion());
+        return new Estudiante(this.estudiante.getId(), this.estudiante.getNombre(), this.estudiante.getApellido(),
+                this.estudiante.getCedula(), this.estudiante.getTelefono(), this.estudiante.getEmail(),
+                this.estudiante.getDireccion());
 
     }
 
     public Libro toLibro() {
-        return new Libro(this.libro.getId(), this.libro.getTitulo(), this.libro.getAutor(), this.libro.getEditorial(),this.libro.getDescripcion(), this.libro.isDisponible(), this.libro.toGenero());
+        Libro libro = new Libro();
+        libro.setId(this.libro.getId());
+        libro.setTitulo(this.libro.getTitulo());
+        libro.setAutor(this.libro.getAutor());
+        libro.setEditorial(this.libro.getEditorial());
+        libro.setDescripcion(this.libro.getDescripcion());
+        libro.setDisponible(this.libro.isDisponible());
+        libro.setGenero(this.libro.toGenero());
+        return libro;
     }
 
 }

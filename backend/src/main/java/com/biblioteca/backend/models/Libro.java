@@ -1,4 +1,5 @@
 package com.biblioteca.backend.models;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,21 +29,11 @@ public class Libro {
     private String descripcion;
     private boolean disponible;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "genero_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "genero_id", referencedColumnName = "id")
     private Genero genero;
 
-    @OneToMany(mappedBy = "libro", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Prestamo> prestamos;
-
-    public Libro(Long id, String titulo, String autor, String editorial, String descripcion, boolean disponible, Genero genero) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editorial = editorial;
-        this.descripcion = descripcion;
-        this.disponible = disponible;
-        this.genero = genero;
-    }
 }

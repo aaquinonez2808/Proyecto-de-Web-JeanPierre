@@ -24,14 +24,12 @@ public class Prestamo {
     private String fechaPrestamo;
     private String fechaDevolucion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "estudiante_id", nullable = false)
     private Estudiante estudiante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "libro_id", nullable = false)
     private Libro libro;
-
-    
     
 }

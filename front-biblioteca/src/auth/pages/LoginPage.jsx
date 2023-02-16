@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
-import { login } from "../../services/AuthService";
+import { startLoginWithEmailPassword } from "../../store/auth";
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
   const { password, email, onInputChange } = useForm({
     email: "",
     password: "",
@@ -10,10 +12,7 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password).then((data) => {
-      localStorage.setItem("token", data);
-        window.location.replace('/');
-    });
+    dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   return (

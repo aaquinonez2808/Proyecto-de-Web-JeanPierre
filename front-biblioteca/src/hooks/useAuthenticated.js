@@ -1,26 +1,31 @@
 
-//Importar el decode del jwt
-import jwtDecode from 'jwt-decode'
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../context/UserContext';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../store/auth/authSlice';
+import decode from 'jwt-decode';
+import { getListEstudiantes } from '../store/estudiante/thunks';
+import { getListGeneros } from '../store/genero/thunks';
+import { getListLibros } from '../store/libro/thunks';
+import { getListPrestamos } from '../store/prestamo/thunks';
 
-export const useAuthenticated = () => {
-    const [authenticated, setAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const { setUser } = useContext(UserContext);
 
-    const CheckingAuthenticated = async () => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            const {email, nombre} = jwtDecode(token)
-            setUser({email, nombre, token})
-            setAuthenticated(true)
-        }
-    }
+export const useCheckAuth = () => {
+    const { status } = useSelector( state => state.auth );
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        setLoading(true)
-        CheckingAuthenticated();
-        setLoading(false)
-    }, [])
-    return {authenticated, loading, setAuthenticated}
+        const token = localStorage.getItem('token');
+        if (token) {
+            const {email, nombre} = decode(token);
+            dispatch( login({email, nombre}));
+            dispatch( getListEstudiantes() );
+            dispatch( getListGeneros() );
+            dispatch( getListLibros() );
+            dispatch(getListPrestamos())
+        } else {
+            dispatch( logout() );
+        }
+    }, []);
+
+    return status;
 }

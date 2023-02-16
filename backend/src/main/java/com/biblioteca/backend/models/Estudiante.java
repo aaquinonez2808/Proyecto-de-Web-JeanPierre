@@ -2,6 +2,8 @@ package com.biblioteca.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,8 @@ public class Estudiante {
     private String email;
     private String direccion;
 
-    @OneToMany(mappedBy = "estudiante", orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estudiante", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Prestamo> prestamos;
 
     public Estudiante(Long id, String nombre, String apellido, String cedula, String telefono, String email, String direccion) {
@@ -43,6 +46,4 @@ public class Estudiante {
         this.email = email;
         this.direccion = direccion;
     }
-    
-    
 }
