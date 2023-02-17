@@ -20,14 +20,10 @@ export const LibroFormPage = ({ setOpen, accion = "create", handleClose }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(generoID);
     const genero = generos.find((gene) => gene.id === parseInt(generoID));
-    console.log(genero);
     if (accion === "update") {
-      console.log(libro.id);
       dispatch(startUpdateLibro({editorial, autor, genero, descripcion, titulo, id: libro.id }));
     } else {
-      console.log({ editorial, autor, genero, descripcion, titulo })
       dispatch(startNewLibro({ editorial, autor, genero, descripcion, titulo }));
     }
     handleClose();
